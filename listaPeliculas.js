@@ -75,43 +75,37 @@ const listaPeliculas = [
 
 // Agrego al DOM los elementos del array
 const movies = document.getElementById("movies");
+const moviesToWatch = document.getElementById("toWatch");
 
 const allMoviesCatalog = () => {
     for (let movie of listaPeliculas) {
-        console.log(movie.name);
-        movies.innerHTML += `
-        <div class="container-movies">
+        
+        //Si la pelicula no esta vista se agrega a la sección PARA VER
+        if(!movie.watch){
+            moviesToWatch.innerHTML += `
+            <div class="container-movies">
                 <div class="movies__img-container"><img class="movies__img" src=${movie.image} alt=""></div>
                 <div class="movies__info">
                     <h2 class="movies__name">${movie.name}</h2>
                     <p class="movies__release">${movie.release}</p>
+                    <p class="movies__genre">${movie.genre}</p>
+                    
                 </div> 
-        </div>
-        `
-         
+            </div>
+            `
+        } else{ //Si la pelicula ya se vió se agrega a la sección YA VISTAS
+            movies.innerHTML += `
+            <div class="container-movies">
+                    <div class="movies__img-container"><img class="movies__img" src=${movie.image} alt=""></div>
+                    <div class="movies__info">
+                        <h2 class="movies__name">${movie.name}</h2>
+                        <p class="movies__release">${movie.release}</p>
+                        <p class="movies__genre">${movie.genre}</p>
+                    </div> 
+            </div>
+            `
+
+        }
     }
 }
 allMoviesCatalog();
-
-// Agrego a la Sección WATCHLIST
-
-const moviesToWatch = document.getElementById("toWatch");
-
-const toWatchMovieCatalog = () => {
-    for (let movie of listaPeliculas) {
-        if(!movie.watch){
-            moviesToWatch.innerHTML += `
-        <div class="container-movies">
-                <div class="movies__img-container"><img class="movies__img" src=${movie.image} alt=""></div>
-                <div class="movies__info">
-                    <h2 class="movies__name">${movie.name}</h2>
-                    <p class="movies__release">${movie.release}</p>
-                </div> 
-        </div>
-        `
-        }
-        
-         
-    }
-}
-toWatchMovieCatalog();

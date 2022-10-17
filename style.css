@@ -7,7 +7,7 @@
 
 body {
     background-color:rgb(242, 243, 240);
-    font-size: 62.5%;
+    font-size: 62.25%;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -20,11 +20,11 @@ h2 {
 } */
 .movie{
     max-width: 1200px;
-    padding: 0 auto;
+    padding: 30px 30px;
     display:flex;
-    justify-content: space-around;
+    justify-content: start;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 40px;
     margin: 20px auto;
 
 
@@ -87,20 +87,73 @@ h2 {
     height: 30px;
     background-color: rgba(240, 240,240,.1);
     border-radius: 6px;
-    border: 2px solid white;
+    border: 2px solid rgb(27, 27, 27);
+    padding-left: 10px;
     
 }
 
 .searchbar::placeholder{
-    color: white;
+    color:  rgb(27, 27, 27);;
     font-family: 'Poppins', sans-serif;
     padding-left: 5px;
 
 }
 
 .max-container{
-    display:flex;
-    flex-direction: column;
     max-width: 1000px;
     margin:0 auto;
 }
+
+.addMovie{
+    position: relative;
+    max-width: 1200px;
+    padding: 0 auto;
+    height: 600px;
+    background-image: url('https://p4.wallpaperbetter.com/wallpaper/109/328/1024/quentin-tarantino-the-hateful-eight-wallpaper-preview.jpg');
+    background-size: cover;
+}
+
+.formulario{
+    width: 300px;
+    position: absolute;
+    transform: translate(50%,25%);
+    transform-origin: 50%;
+    background-color: rgba(0, 0, 0, 0.288);
+    display: inline-block;
+    padding: 30px 30px;
+    display: flex;
+    flex-direction: column;
+}
+.form-input {
+    margin: .5rem 1rem;
+    padding-left: 3px;
+    border-radius: 8px;
+    border:0;
+    height: 30px;
+     
+}
+
+.form-label{
+    color: white;
+    margin: 0 1rem;
+}
+
+.range{
+    cursor: pointer;
+    background: aquamarine;
+}
+
+.btn{
+    color: white;
+    margin: 0 1rem;
+    height: 40px;
+    border-radius: 8px;
+    border: solid 0 white;
+    background-color:rgb(42, 171, 42);
+}
+
+.btn:hover{
+    background-color:rgb(72, 205, 72);
+    cursor: pointer;
+}
+

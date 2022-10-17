@@ -11,22 +11,52 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <main class="max-container">
-        <header class="nav">
-             <div class="container-nav">
-                <input type="text" id="formulario" class="searchbar" placeholder="Pelicula..">
+    <main>
+        <header class="nav max-container">
+             <div class="container-nav ">
+                <input type="text" class="searchbar" placeholder="Pelicula..">
              </div>
 
         </header>
-        <h2 class="titulo">Películas para ver</h2>
-        <section class="movie" id="toWatch"> </section>
-        <h2 class="titulo">Todas las películas</h2>
-        <section class="movie" id="movies"> </section>
+        <h2 class="titulo max-container">Películas para ver </h2>
+        <section class="movie max-container" id="toWatch"> </section>
+        <h2 class="titulo">Películas ya vistas</h2>
+        <section class="movie max-container" id="movies"> </section>
             
-            
-        
+        <section class="addMovie max-container">
+            <h2 class="titulo">Agregar Película</h2>
+            <form class="formulario" id="formulario">
+                <label for="name" class="form-label">Nombre Película: </label>
+                <input type="text" class="form-input" id="name" required>
 
+                <label for="genre" class="form-label">Género:</label>
+                <select id="genre" class="form-input" required>
+                    <option value="accion">Acción</option>
+                    <option value="drama">Drama</option>
+                    <option value="scifi">Ciencia Ficción</option>
+                    <option value="animada">Animada</option>
+                    <option value="comedia">Comedia</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="documental">Documental</option>
+                </select>
 
+                <label for="image" class="form-label">Link imagen portada: </label>
+                <input type="text" class="form-input" id="image" placeholder="Ingrese link" value="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png">
+                
+                <label for="release" class="form-label">Año de estreno: </label>
+                <input type="number" class="form-input" id="release" min="1930" max="2030" placeholder="2010">
+                
+                <label for="rank" class="form-label ">Puntuación: </label>
+                <input type="range" id="rank" name="rank" min="0" max="5" class="form-input range">
+                
+                <label for="watch" class="form-label">¿Ya la viste?</label>
+                <select id="watch" class="form-input" required>
+                    <option value="si">Si</option>
+                    <option value="no">No</option>
+                </select>
+                <button type="submit" class="btn">Agregar Película</button>
+            </form>
+        </section>   
     </main>
     
     <script src="./listaPeliculas.js"></script>
