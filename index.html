@@ -20,7 +20,7 @@
         </header>
         <h2 class="titulo max-container">Películas para ver </h2>
         <section class="movie max-container" id="toWatch"> </section>
-        <h2 class="titulo">Películas ya vistas</h2>
+        <h2 class="titulo max-container">Películas ya vistas</h2>
         <section class="movie max-container" id="movies"> </section>
             
         <section class="addMovie max-container">
@@ -41,10 +41,10 @@
                 </select>
 
                 <label for="image" class="form-label">Link imagen portada: </label>
-                <input type="text" class="form-input" id="image" placeholder="Ingrese link" value="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png">
+                <input type="text" class="form-input" id="image" placeholder="Ingrese link">
                 
                 <label for="release" class="form-label">Año de estreno: </label>
-                <input type="number" class="form-input" id="release" min="1930" max="2030" placeholder="2010">
+                <input type="number" class="form-input" id="release" min="1930" max="2030" placeholder="2010" required>
                 
                 <label for="rank" class="form-label ">Puntuación: </label>
                 <input type="range" id="rank" name="rank" min="0" max="5" class="form-input range">

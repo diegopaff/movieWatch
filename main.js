@@ -1,82 +1,137 @@
 
+//---------------Base de Peliculas------------------
+let basePeliculas = [];
+let favoriteMovies = [];
+// verificamos si hay guardado en el local Storage una base 
+if(JSON.parse(localStorage.getItem("Pelicula") != null)){
+    basePeliculas = JSON.parse(localStorage.getItem("Pelicula"));
+}else{//sino creamos agregamos la predefinida a la base y la subimos al Local Storage
+    basePeliculas = listaPeliculas;
+    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));
+}
+
+
+//---------------Peliculas Favoritas------------------
+
+
+
+// Agrego al DOM los elementos del array basePeliculas
+const movies = document.getElementById("movies");
+const moviesToWatch = document.getElementById("toWatch");
+
+
+
+const showMovies = () => {
+    basePeliculas.forEach((movie) => {
+        const card =document.createElement("div");
+        card.classList.add("container-movies");
+
+        // Si la película es favorita se modifica el color del icono 
+        let isFavorite = 'nonFavorite';
+        if(movie.favorite === true){
+            isFavorite += ' favorite';
+            // agregamos la pelicula a la playlist favorite Movies
+            favoriteMovies.push(movie); 
+        }
+        
+        card.innerHTML = `
+            <div class="${isFavorite}" id="fav${movie.id}"> &#9829 </div>
+            <div class="movies__img-container"><img class="movies__img" src=${movie.image} alt=""></div>
+            <div class="movies__info">
+                <h2 class="movies__name">${movie.name}</h2>
+                <p class="movies__release">${movie.release}</p>
+                <p class="movies__genre">${movie.genre}</p>
+                    
+
+            </div> 
+        `
+        //Se agrega a la seccion correspondiente segun si se vio o No
+        if(!movie.watch){
+            moviesToWatch.appendChild(card);
+        }else{
+            movies.appendChild(card);
+        }
+
+        const toFavorite = document.getElementById(`fav${movie.id}`);
+        toFavorite.addEventListener("click", () => {
+            toFavorite.classList.toggle("favorite");
+            addToFavorite(movie.id);
+                
+                    
+        });
+
+    });
+
+        
+} 
+showMovies();
+        
+const addToFavorite = (id) => {
+    const movie = basePeliculas.find((movie) => movie.id === id);
+    const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
+    if(movieInFavourites){
+        movie.favorite = false;     
+    }else{
+        movie.favorite = true;
+    }
+    movies.innerHTML = '';
+    moviesToWatch.innerHTML = '';
+    favoriteMovies = []; // vacio el array de peliculas favoritas para que no se dupliquen
+    showMovies();
+    console.log(favoriteMovies);
+    
+    
+}
+
 // Creamos constructor de Pelicula
 class Pelicula {
-    constructor(name,genre,image,release,rank,watch){
+    constructor(name,genre,image,release,rank,watch,favorite){
+        this.id = (basePeliculas.length + 1);
         this.name = name;
         this.genre = genre;
         this.image = image;
         this.release = release;
         this.rank = rank;
         this.watch = watch;
+        this.favorite = favorite;
     }
 
-    // método para cambiar el estado de no vista a vista (Todavia no tiene funcionalidad)
-/*     isWatch() {
-        if(!this.watch){
-            this.watch = true;
-        } */
+
 }
-
-
-
-// Funcion para agregar manualmente un a nueva pelicula
-/* function agregarPeliculaManual(){
-    const name = prompt("Nombre de Pelicula: ");
-    const genre = prompt("Genero: ");
-    const image = prompt("Copie link de Imagen de Película: ");
-    const release = parseInt(prompt("Fecha de salida: "));
-    const rank = parseInt(prompt("Ranking IMDB: "));
-    const isWatch = prompt("Ya la viste? ingrese Y / N: ");
-    const watch = false;
-    if (isWatch.toUpperCase === "Y"){
-        watch = true;
-    }
-    //creamos un objeto Pelicula nuevo
-    const peliculaNueva = new Pelicula(name, genre, image, release, rank, watch);
-    listaPeliculas.push(peliculaNueva); // lo agreamos al array listaPeliculas
-    
-    // agregamos al DOM la nueva pelicula
-    if (!watch){ //Si la pelicula no esta vista se agrega tambien a la seccion para ver
-        moviesToWatch.innerHTML = "";
-        toWatchMovieCatalog();
-    }
-    movies.innerHTML = '';
-    allMoviesCatalog(); 
-} */
 
 // Agregamos nueva pelìcula con el formulario
 const idFormulario = document.getElementById("formulario");
-console.log(idFormulario);
 idFormulario.addEventListener("submit", (e)=> {
     // Para que no recargue la página. 
     e.preventDefault();
+
     const name = document.getElementById("name").value;
-    console.log(name);
     const genre = document.getElementById("genre").value;
-    const image = document.getElementById("image").value;
+    const image = document.getElementById("image").value || "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/330px-No-Image-Placeholder.svg.png";
     const release = document.getElementById("release").value;
     const rank = document.getElementById("rank").value;
     const isWatch = document.getElementById("watch").value;
-    const watch = false;
+    let watch = false;
+    const favorite = false;
     //Pasamos a booleano el atributo watch
-    if (isWatch === "si"){ 
+    if (isWatch == "si"){ 
         watch = true;
     }
     //creamos un objeto Pelicula nuevo
-    const peliculaNueva = new Pelicula(name, genre, image, release, rank, watch);
+    const peliculaNueva = new Pelicula(name, genre, image, release, rank, watch,favorite);
     console.log(peliculaNueva);
 
     //agregamos el nuevo objeto Pelicula al array de películas 
-    listaPeliculas.push(peliculaNueva); 
+    basePeliculas.push(peliculaNueva); 
 
     //Guardamos los datos en el localStorage: 
-    localStorage.setItem("Pelicula", JSON.stringify(listaPeliculas));
-    console.log(listaPeliculas);
+    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));
+
 
     // agregamos al DOM la nueva pelicula  
     movies.innerHTML = '';
     moviesToWatch.innerHTML = '';
-    allMoviesCatalog();
+    showMovies();
     
 
    //Limpiamos el formulario.
@@ -84,27 +139,8 @@ idFormulario.addEventListener("submit", (e)=> {
 })
 
 
-/* // 
-alert("Bienvenidos al Watchlist de Peliculas: ");
 
- do{
-    let accion = prompt("Menu de fuciones: \n 1) Ver lista de todas las peliculas \n 2) Lista de peliculas sin ver \n 3) Agregar Nueva Pelicula");
 
-    if (accion == '1'){
-        listaPeliculas.forEach(element => console.log(element));
-        
-    }else if(accion == '2'){
-        listaPeliculas.forEach(element => {
-         if (!element.watch){
-            console.log(element);
-         };
-        }
-        )       
-    }else if(accion == '3'){
-        console.log(agregarPeliculaManual());
-    }
-    
-} while (confirm("Desea continuar?")); */
 
 
 
