@@ -23,19 +23,29 @@ const moviesToWatch = document.getElementById("toWatch");
 
 const showMovies = () => {
     basePeliculas.forEach((movie) => {
-        const card =document.createElement("div");
+        const card = document.createElement("div");
         card.classList.add("container-movies");
 
-        // Si la película es favorita se modifica el color del icono 
-        let isFavorite = 'nonFavorite';
-        if(movie.favorite === true){
-            isFavorite += ' favorite';
-            // agregamos la pelicula a la playlist favorite Movies
-            favoriteMovies.push(movie); 
+        // Si la película ya se vio, se puede agregar a favoritos y modificamos el color del boton
+        let isFavorite = 'hidden__favorite';
+        let titleFavorite = '';
+        if(movie.watch){
+            if(movie.favorite === true){
+                isFavorite = 'non__favorite favorite';
+                titleFavorite = 'Quitar de favoritos'
+                // agregamos la pelicula a la playlist favorite Movies
+                favoriteMovies.push(movie); 
+            }else{
+                isFavorite = 'non__favorite';
+                titleFavorite = 'Agregar a favoritos'
+            }
+
+            
+
         }
         
         card.innerHTML = `
-            <div class="${isFavorite}" id="fav${movie.id}"> &#9829 </div>
+            <div class="${isFavorite}" id="fav${movie.id}" title="${titleFavorite}"> &#9829 </div> 
             <div class="movies__img-container"><img class="movies__img" src=${movie.image} alt=""></div>
             <div class="movies__info">
                 <h2 class="movies__name">${movie.name}</h2>
@@ -47,15 +57,21 @@ const showMovies = () => {
         `
         //Se agrega a la seccion correspondiente segun si se vio o No
         if(!movie.watch){
+           
             moviesToWatch.appendChild(card);
+
         }else{
+
             movies.appendChild(card);
         }
 
+        //Cuando se hace clic en el corazon se agrega a la lista favoriteMovies y se cambia el estilo del boton
         const toFavorite = document.getElementById(`fav${movie.id}`);
         toFavorite.addEventListener("click", () => {
             toFavorite.classList.toggle("favorite");
             addToFavorite(movie.id);
+            playlist.innerHTML='';
+            showFavorites();
                 
                     
         });
@@ -65,23 +81,40 @@ const showMovies = () => {
         
 } 
 showMovies();
-        
+
+// funcion para agregar película 
 const addToFavorite = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
     const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
     if(movieInFavourites){
-        movie.favorite = false;     
+        movie.favorite = false; //saco pelicula de la lista    
     }else{
-        movie.favorite = true;
+        movie.favorite = true; // agrego pelicula a la lista
     }
     movies.innerHTML = '';
     moviesToWatch.innerHTML = '';
     favoriteMovies = []; // vacio el array de peliculas favoritas para que no se dupliquen
     showMovies();
     console.log(favoriteMovies);
-    
-    
+    //actualizo el localStorage con los nuevos valores.
+    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));   
 }
+
+const playlist = document.getElementById("playlist");
+const showFavorites = () => {
+    favoriteMovies.forEach((movie) => {
+        const card = document.createElement("li");
+        card.classList.add("item");
+        card.innerHTML = `
+            <h3 class="item__title"> ${movie.name} </h3>
+            <img class="item__img" src="${movie.image}" alt="${movie.name}">
+
+        `
+        playlist.appendChild(card);
+
+});
+}
+showFavorites();
 
 // Creamos constructor de Pelicula
 class Pelicula {

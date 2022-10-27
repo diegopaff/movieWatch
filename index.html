@@ -11,17 +11,32 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <main>
+    <main class="main-display max-container">
         <header class="nav max-container">
              <div class="container-nav ">
                 <input type="text" class="searchbar" placeholder="Pelicula..">
              </div>
 
         </header>
-        <h2 class="titulo max-container">Películas para ver </h2>
-        <section class="movie max-container" id="toWatch"> </section>
-        <h2 class="titulo max-container">Películas ya vistas</h2>
-        <section class="movie max-container" id="movies"> </section>
+        
+        <section class="movies-to-watch toWatch">
+            <h2 class="titulo max-container">Películas para ver</h2>
+            <div class="movie movie_carrousel max-container " id="toWatch"></div>
+        </section>
+        <aside class="favourite-list">
+            <h2 class="favourite-list__title">Lista de Favoritas:</h2>
+            <ul class="list" id="playlist">
+                <img src="" alt="">
+                <!-- <li class="item">Coffee</li>
+                <li class="item">Tea</li>
+                <li class="item">Milk</li> -->
+            </ul>
+        </aside>
+        
+        <section class="watched-movies  watched"> 
+            <h2 class="titulo max-container">Películas ya vistas</h2>
+            <div class="movie max-container" id="movies"></div>
+        </section>
             
         <section class="addMovie max-container">
             <h2 class="titulo">Agregar Película</h2>

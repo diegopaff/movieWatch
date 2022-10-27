@@ -15,7 +15,7 @@ const listaPeliculas = [
         genre: 'Thriller',
         image: 'https://m.media-amazon.com/images/M/MV5BMGNkYzY2ZjUtODU4My00Mjc5LWEwNDAtMzUxZjcxZWJhZTcwXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg',
         release: 1972,
-        rank: 10,
+        rank: 1,
         watch: false,
         favorite: false
     },
@@ -45,7 +45,7 @@ const listaPeliculas = [
         genre: 'Accion',
         image: 'https://m.media-amazon.com/images/M/MV5BNTZlYTE1MDktOGRkOC00NjIwLWIyY2MtYjQxMDZlMDlmYmRkXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_.jpg',
         release: 2022,
-        rank: 8,
+        rank: 1,
         watch: false,
         favorite: false
     },
@@ -77,6 +77,36 @@ const listaPeliculas = [
         release: 2022,
         rank: 8,
         watch: true,
+        favorite: false
+    },
+    {
+        id: 9,
+        name: '1917',
+        genre: 'Action',
+        image: 'https://a.ltrbxd.com/resized/film-poster/4/6/0/1/5/5/460155-1917-0-500-0-750-crop.jpg',
+        release: 2019,
+        rank: 1,
+        watch: false,
+        favorite: false
+    },
+    {
+        id: 10,
+        name: 'Black Adam',
+        genre: 'Action',
+        image: 'https://a.ltrbxd.com/resized/film-poster/3/6/9/1/7/9/369179-black-adam-0-500-0-750-crop.jpg',
+        release: 2022,
+        rank: 1,
+        watch: false,
+        favorite: false
+    },
+    {
+        id: 11,
+        name: 'Everything Everywhere All at Once',
+        genre: 'Action',
+        image: 'https://a.ltrbxd.com/resized/film-poster/4/7/4/4/7/4/474474-everything-everywhere-all-at-once-0-500-0-750-crop.jpg',
+        release: 2022,
+        rank: 1,
+        watch: false,
         favorite: false
     },
 ];
