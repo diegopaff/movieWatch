@@ -29,7 +29,11 @@ const showMovies = () => {
         // Si la película ya se vio, se puede agregar a favoritos y modificamos el color del boton
         let isFavorite = 'hidden__favorite';
         let titleFavorite = '';
+        let visibility = 'visibility_off';
+        let isWatched = 'non__watched';
         if(movie.watch){
+            isWatched = ' non__watched yes__watched';
+            visibility = 'visibility';
             if(movie.favorite === true){
                 isFavorite = 'non__favorite favorite';
                 titleFavorite = 'Quitar de favoritos'
@@ -38,14 +42,14 @@ const showMovies = () => {
             }else{
                 isFavorite = 'non__favorite';
                 titleFavorite = 'Agregar a favoritos'
-            }
-
-            
-
+            }   
+        // si la pelicula no se vio se puede agregar a vistas haciendo clic en el ojo    
         }
+         
         
         card.innerHTML = `
-            <div class="${isFavorite}" id="fav${movie.id}" title="${titleFavorite}"> &#9829 </div> 
+            <div class="${isWatched}" id="watch${movie.id}" title="${titleFavorite}"> <i class="material-icons">${visibility}</i> </div>
+            <div class="${isFavorite}" id="fav${movie.id}" title="${titleFavorite}"> <i class="material-icons">favorite</i> </div>
             <div class="movies__img-container"><img class="movies__img" src=${movie.image} alt=""></div>
             <div class="movies__info">
                 <h2 class="movies__name">${movie.name}</h2>
@@ -72,17 +76,35 @@ const showMovies = () => {
             addToFavorite(movie.id);
             playlist.innerHTML='';
             showFavorites();
-                
-                    
         });
 
-    });
+        //Cuando se hace clic en el ojo se agrega a la lista ya vistas y se cambia el estilo del ojo
+        const toWatched = document.getElementById(`watch${movie.id}`);
+        toWatched.addEventListener("click", () => {
+            toWatched.classList.toggle("yes__watched");
+            addToWatched(movie.id);  
+        });
 
         
-} 
+    }); 
+}
 showMovies();
+// funcion para agregar película a favorito
+const addToWatched = (id) => {
+    const movie = basePeliculas.find((movie) => movie.id === id);
+    if(movie.watch){
+        movie.watch = false; //saco pelicula de vistas 
+    }else{
+        movie.watch = true; // agrego pelicula a la lista
+    }
+    movies.innerHTML = '';
+    moviesToWatch.innerHTML = '';
+    showMovies();
+    //actualizo el localStorage con los nuevos valores.
+    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));   
+}
 
-// funcion para agregar película 
+// funcion para agregar película a favorito
 const addToFavorite = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
     const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
@@ -100,6 +122,7 @@ const addToFavorite = (id) => {
     localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));   
 }
 
+// agregar al DOM la lista de favoritos 
 const playlist = document.getElementById("playlist");
 const showFavorites = () => {
     favoriteMovies.forEach((movie) => {

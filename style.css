@@ -18,6 +18,12 @@ h2 {
     margin-top: 20px;
     word-break: break-all;
 }
+.max-container{
+    max-width: 1000px;
+    margin:0 auto;
+}
+
+/*************** GENERAL GRID ******/
 .main-display{
     display: grid;
     grid-template-areas:
@@ -29,6 +35,7 @@ h2 {
     grid-auto-rows: auto;
     grid-template-columns: 1.2fr 1.2fr .8fr;
 }
+
 
 .nav{
     grid-area: head;
@@ -42,6 +49,7 @@ h2 {
     grid-area: toWatch;
 }
 
+/********* movie cards *************/
 .movie{
     padding: 30px 30px;
     display:flex;
@@ -95,7 +103,7 @@ h2 {
     font-size: 1rem;
        
 }
-
+/* add to favorites hearth*/
 .hidden__favorite{
     display: none;
 }
@@ -103,7 +111,7 @@ h2 {
     display: flex;
     cursor: pointer;
     position: absolute;
-    transform: translate(150px,-150px);
+    transform: translate(155px,-150px);
     width: 2rem;
     height: 2rem;
     color:rgb(229, 229, 229);
@@ -120,6 +128,32 @@ h2 {
 
 }
 
+/* add to watched eye */
+.non__watched{
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    transform: translate(155px,-150px);
+    width: 2rem;
+    height: 2rem;
+    color:rgb(229, 229, 229);
+    font-size: 2rem;
+    border-radius: 50% 50%;
+    background-color: rgba(113, 113, 113, 0.29);
+    justify-content: center;
+    align-items: center;
+
+}
+
+.yes__watched{
+    background-color: rgba(64, 165, 106, 0.564);
+    color: rgba(16, 236, 8, 0.9);
+    transform: translate(115px,-150px);
+}
+
+
+
+/***************** NAVIGATION BAR ********************/
 .container-nav{
     max-width: 1000px;
     min-height: 45vh;
@@ -132,9 +166,7 @@ h2 {
     align-items: flex-end;
     padding-bottom: 15px;
     
-
 }
-
 
 .searchbar{
     margin-top: 20px;
@@ -155,11 +187,8 @@ h2 {
 
 }
 
-.max-container{
-    max-width: 1000px;
-    margin:0 auto;
-}
 
+/************** Section: ADD MOVIE ******************************/
 .addMovie{
     width: 100%;
     grid-area: add-movie;
@@ -215,7 +244,7 @@ h2 {
     cursor: pointer;
 }
 
-/****** lista de favoritos ***********/
+/*************** lista de favoritos ********************/
 .favourite-list{
     position: relative;
     grid-area: aside;
@@ -230,9 +259,10 @@ h2 {
   }
 
 .list{
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
-    border-radius: 15px;
+    border-radius: 3px;
+    border-color: rgb(169, 169, 169);
     list-style-type:none;
     display: flex;
     width: 100%;
