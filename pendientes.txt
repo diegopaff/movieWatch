@@ -1,0 +1,11 @@
+PENDIENTES
+
+- Sweet alert inferior derecho avisando que se agrego a vistas y a favoritas
+
+-Buscador de peliculas
+
+- Mostrar ranking con estrellitas
+
+- Cambiar imagen del señor de los anillos
+
+- sale doble el toastify de agregar a favoritos

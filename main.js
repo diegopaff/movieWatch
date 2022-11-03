@@ -76,13 +76,25 @@ const showMovies = () => {
             addToFavorite(movie.id);
             playlist.innerHTML='';
             showFavorites();
-        });
+            Toastify({
+                text: "Se agregó a favoritos",
+                duration: 3000,
+                gravity: "bottom",
+                position: "right", 
+                stopOnFocus: true, 
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                  },
+                }).showToast();
+            }
+        );
 
-        //Cuando se hace clic en el ojo se agrega a la lista ya vistas y se cambia el estilo del ojo
+        //Cuando se hace clic en el ojo se agrega a la seccion ya vistas y se cambia el estilo del ojo
         const toWatched = document.getElementById(`watch${movie.id}`);
         toWatched.addEventListener("click", () => {
             toWatched.classList.toggle("yes__watched");
-            addToWatched(movie.id);  
+            addToWatched(movie.id);
+            
         });
 
         
@@ -93,9 +105,29 @@ showMovies();
 const addToWatched = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
     if(movie.watch){
-        movie.watch = false; //saco pelicula de vistas 
+        movie.watch = false; //saco pelicula de vistas
+        Toastify({
+            text: "Se agregó a Película vista",
+            duration: 3000,
+            gravity: "bottom",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+            }).showToast();  
     }else{
         movie.watch = true; // agrego pelicula a la lista
+        Toastify({
+            text: "Se agrego a Película para ver", 
+            duration: 3000,
+            gravity: "bottom",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+            }).showToast();
     }
     movies.innerHTML = '';
     moviesToWatch.innerHTML = '';
@@ -109,9 +141,29 @@ const addToFavorite = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
     const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
     if(movieInFavourites){
-        movie.favorite = false; //saco pelicula de la lista    
+        movie.favorite = false; //saco pelicula de la lista
+        Toastify({
+            text: "Se sacó de Favoritas", 
+            duration: 3000,
+            gravity: "bottom",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+            }).showToast();    
     }else{
         movie.favorite = true; // agrego pelicula a la lista
+        Toastify({
+            text: "Se agregó a Favoritas", 
+            duration: 3000,
+            gravity: "bottom",
+            position: "right", 
+            stopOnFocus: true, 
+            style: {
+                background: "linear-gradient(to right, #00b09b, #96c93d)",
+              },
+            }).showToast();
     }
     movies.innerHTML = '';
     moviesToWatch.innerHTML = '';
