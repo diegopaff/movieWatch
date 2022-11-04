@@ -19,25 +19,42 @@
 <body>
     <main class="main-display max-container">
         <header class="nav max-container">
-             <div class="container-nav ">
-                <input type="text" class="searchbar" placeholder="Pelicula..">
-             </div>
+             <form class="container-nav " id="searchbar">
+                    <input type="text"  class="searchbar" placeholder="Buscar Película.." id="buscarPelicula">
+                    <button type="submit" class="btn-nav"><i class="material-icons">search</i></button> 
+             </form>
 
+             <div class="search-movies search"> 
+                 <h2 class="titulo max-container">Busqueda</h2>
+                 <div class="movie max-container" id="searchMovies"></div>
+             </div>
         </header>
+        <aside class="side-nav max-container">
+            <a href="#" class="link"><img src="./img/logo-transp-turquesa.png" alt="App Logo" class="side-nav__logo"></a>  
+            <ul class="menu-list">
+                <li class="menu-item menu-item__active">
+                    <a href="#" class="fill-div"><i class="material-icons">home</i>Home</a>
+                </li>
+                <li class="menu-item">            
+                    <a href="#" class="fill-div"> <i class="material-icons">weekend</i> Quiero Ver</a>
+                </li>
+                <li class="menu-item">            
+                    <a href="#" class="fill-div"> <i class="material-icons">check</i> Ya vistas</a>
+                </li>
+            </ul>
+        </aside>
+
+        <div class="favourite-list">
+            <h2 class="favourite-list__title">Lista de Favoritas:</h2>
+            <ul class="list" id="playlist">
+                
+            </ul>
+        </div>
         
         <section class="movies-to-watch toWatch">
             <h2 class="titulo max-container">Películas para ver</h2>
             <div class="movie movie_carrousel max-container " id="toWatch"></div>
         </section>
-        <aside class="favourite-list">
-            <h2 class="favourite-list__title">Lista de Favoritas:</h2>
-            <ul class="list" id="playlist">
-                <img src="" alt="">
-                <!-- <li class="item">Coffee</li>
-                <li class="item">Tea</li>
-                <li class="item">Milk</li> -->
-            </ul>
-        </aside>
         
         <section class="watched-movies  watched"> 
             <h2 class="titulo max-container">Películas ya vistas</h2>
@@ -84,7 +101,9 @@
     <!-- toastify -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <!-- Archivos Js -->
+
     <script src="./listaPeliculas.js"></script>
+    <script src="./api_handler.js"></script>
     <script src="./main.js"></script>
 </body>
 </html>

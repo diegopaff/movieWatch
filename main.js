@@ -76,16 +76,7 @@ const showMovies = () => {
             addToFavorite(movie.id);
             playlist.innerHTML='';
             showFavorites();
-            Toastify({
-                text: "Se agregó a favoritos",
-                duration: 3000,
-                gravity: "bottom",
-                position: "right", 
-                stopOnFocus: true, 
-                style: {
-                    background: "linear-gradient(to right, #00b09b, #96c93d)",
-                  },
-                }).showToast();
+           
             }
         );
 
@@ -107,7 +98,7 @@ const addToWatched = (id) => {
     if(movie.watch){
         movie.watch = false; //saco pelicula de vistas
         Toastify({
-            text: "Se agregó a Película vista",
+            text: "Se agregó a Película para ver",
             duration: 3000,
             gravity: "bottom",
             position: "right", 
@@ -119,7 +110,7 @@ const addToWatched = (id) => {
     }else{
         movie.watch = true; // agrego pelicula a la lista
         Toastify({
-            text: "Se agrego a Película para ver", 
+            text: "Se agrego a Película ya vista", 
             duration: 3000,
             gravity: "bottom",
             position: "right", 
@@ -143,13 +134,13 @@ const addToFavorite = (id) => {
     if(movieInFavourites){
         movie.favorite = false; //saco pelicula de la lista
         Toastify({
-            text: "Se sacó de Favoritas", 
+            text: `Se eliminó de Favoritas` , 
             duration: 3000,
             gravity: "bottom",
             position: "right", 
             stopOnFocus: true, 
             style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #E66868, #ED21A3)",
               },
             }).showToast();    
     }else{
@@ -161,7 +152,7 @@ const addToFavorite = (id) => {
             position: "right", 
             stopOnFocus: true, 
             style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
+                background: "linear-gradient(to right, #E66868, #ED21A3)",
               },
             }).showToast();
     }

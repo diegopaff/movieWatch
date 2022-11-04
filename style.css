@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color:rgb(34, 34, 34);
+    background-color:#7B7B7B;
     font-size: 62.25%;
     font-family: 'Poppins', sans-serif;
 }
@@ -16,25 +16,30 @@ main{
 }
 h2 {
     margin-top: 20px;
-    word-break: break-all;
     color: #E8E8E8;
 }
 .max-container{
-    max-width: 1000px;
+    max-width: 100vw;
     margin:0 auto;
 }
 
+a.fill-div {
+    display: block;
+    height: 100%;
+    width: 100%;
+    text-decoration: none;
+}
 /*************** GENERAL GRID ******/
 .main-display{
     display: grid;
     grid-template-areas:
-        "head head head "
-        "toWatch toWatch toWatch"
-        "watched watched aside"
-        "add-movie add-movie add-movie";
+        "nav head head favourite-list "
+        "nav toWatch toWatch favourite-list"
+        "nav watched watched favourite-list"
+        "nav add-movie add-movie favourite-list";
     grid-template-rows: auto;
     grid-auto-rows: auto;
-    grid-template-columns: 1.2fr 1.2fr .8fr;
+    grid-template-columns:.6fr 1.4fr 1.4fr .6fr;
 }
 
 
@@ -48,6 +53,7 @@ h2 {
 }
 .toWatch{
     grid-area: toWatch;
+    width: 100%;
 }
 
 /********* movie cards *************/
@@ -57,11 +63,15 @@ h2 {
     justify-content: start; 
     flex-wrap: wrap;
     white-space: nowrap;
-    gap: 40px;
+    gap: 30px;
     margin: 20px auto;
 }
 
+.movies-to-watch{
+    width: 100%;
+}
 .movie_carrousel{
+    width: 100%;
     flex-wrap: nowrap;
     overflow-x: scroll;
 }
@@ -111,6 +121,8 @@ h2 {
 
 .movies__name{
     font-size: 1rem;
+    word-break: break-all;
+    width: 150px;
    
        
 }
@@ -161,41 +173,146 @@ h2 {
     color: rgba(16, 236, 8, 0.9);
     transform: translate(115px,-133px);
 }
+/***************** SIDE NAV BAR **********************/
+
+.side-nav {
+    color:#666666 ;
+    grid-area: nav;
+    height: 100%;
+    width: 240px;
+    z-index: 1;
+    position:fixed;
+    background-color: #212121;
+    overflow-x: hidden;
+  }
+
+.side-nav__logo{
+    width: 50%;
+}
+.menu-list{
+    width: 100%;
+}
+
+.menu-list i{
+    padding-right:15px;
+
+}
+.menu-item{    
+    width: 100%;
+    font-size: 20px;
+    height:80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-item a {
+    color:#3DD2CC;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+.menu-item__active{ 
+    color:#3DD2CC;   
+    width: 100%;
+    background-color:rgba(61, 210, 204, 0.5);
+    height:80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 5px solid rgba(61, 210, 204, 0.75);
+}
+.menu-item__active:hover{ 
+    background-color:rgba(66, 230, 225, 0.5);
+}
+.menu-item:hover{
+    background-color: #343434;
+}
+.link{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1rem 0;
+}
 
 
 
 /***************** NAVIGATION BAR ********************/
 .container-nav{
-    max-width: 1000px;
-    min-height: 45vh;
-    background-image: url(./img/fondo.webp);
-    background-repeat: no-repeat ;
-    background-size: cover;
-    background-position: 15% 60%;
+    max-width: 100%;
+    min-height: 3rem;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     padding-bottom: 15px;
-    
+}
+
+.buscador{
+    width: 100%;
+}
+
+
+.btn-nav{
+    color:rgb(0, 0, 0);
+    font-size: 0.7rem;
+    margin: 0 1rem;
+    height: 30px;
+    width: 30px;
+    border-radius: 8px;
+    border: solid 2 rgb(0, 0, 0);
+    background-color:rgba(0, 0, 0, 0);
+}
+
+.btn-nav:hover{
+    background-color:rgb(0, 0, 0);
+    color:rgb(255, 255, 255);
+    cursor: pointer;
 }
 
 .searchbar{
     margin-top: 20px;
     font-size: 0.7rem;
-    width: 30%;
-    height: 30px;
+    width: 100%;
+    height: 40px;
     background-color: rgba(240, 240,240,.1);
     border-radius: 6px;
     border: 2px solid rgb(27, 27, 27);
     padding-left: 10px;
+    outline: none;
     
 }
 
 .searchbar::placeholder{
-    color:  rgb(27, 27, 27);;
+    color:  rgb(149, 149, 149);;
     font-family: 'Poppins', sans-serif;
     padding-left: 5px;
 
+}
+
+.container-movies-search{
+    position: relative;
+    background-color:#212121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 200px;
+    width: 120px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 24px;
+    border-radius:20px ;
+    overflow: hidden;
+
+}
+
+.movies__info-nav{
+    position:absolute;
+    display: inline;
+    background: linear-gradient(0deg, rgba(0,0,0,0.8802871490393032) 0%, rgba(0,0,0,0.5749650201877626) 79%, rgba(0,0,0,0.40129555240064774) 90%, rgba(0,0,0,0) 100%);
+    color: #E8E8E8;
+    width: 100%;
+    min-height: 100%;
+    transform: translate(0,130px);
+    padding-left: 10px;    
+    transition: .4s ease-in-out; 
 }
 
 
@@ -262,8 +379,9 @@ h2 {
 
 /*************** lista de favoritos ********************/
 .favourite-list{
-    position: relative;
-    grid-area: aside;
+    position:relative;
+    background-color: aquamarine;
+    grid-area: favourite-list;
     padding-top: 1.4rem;
     width: 100%;
     height: 100%;
