@@ -4,4 +4,5 @@ PENDIENTES
 
 - Cambiar imagen del señor de los anillos
 
-- crear menu sidebar
+- bOTON AGREGAR PELICULA DESDE API
+

@@ -31,11 +31,14 @@ searchbar.addEventListener("submit", (e)=> {
 
 const searchMovies = document.getElementById("searchMovies");
 function showSearchResults(datos) {
+    let numberOfFind = 1;
     datos.forEach(movie => {
        
         const card = document.createElement("div");
         card.classList.add("container-movies-search");
+        card.id =`api${numberOfFind}`
         card.innerHTML = `
+            <div class="movies__addMovie" id="AddMovieFromApi"> <i class="material-icons">add_box</i> </div>
             <div class="movies__img-container"><img class="movies__img" src=${movie.Poster} alt=""></div>
             <div class="movies__info-nav">
                 <h2 class="movies__name">${movie.Title}</h2>
@@ -43,11 +46,42 @@ function showSearchResults(datos) {
 
             </div> 
         ` 
+        
         searchMovies.appendChild(card);
+        listaApi.push(movie);
         
-        
+        //agrego funcionalidad al boton para agregar pelicula de la api a la base de datos.
+        const apiToDatabase = document.getElementById(`api${numberOfFind}`);
+        apiToDatabase.addEventListener("click", () => {
+                addMovieFromApi(movie.Title);
+            }
+        );
+        numberOfFind++;
     });
 
+}
+
+function addMovieFromApi(movieTitle){
+
+    listaApi.forEach(item =>{
+        if (item.Title === movieTitle){
+            //creamos un objeto Pelicula nuevo
+            const peliculaNuevaDesdeApi = new Pelicula(item.Title, 'unknow', item.Poster, item.Year, 0, false,false); 
+
+            //agregamos el nuevo objeto Pelicula al array de películas 
+            basePeliculas.push(peliculaNuevaDesdeApi); 
+
+            //Guardamos los datos en el localStorage: 
+            localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));
+
+
+            // agregamos al DOM la nueva pelicula  
+            movies.innerHTML = '';
+            moviesToWatch.innerHTML = '';
+            showMovies();
+        }
+        
+    })
 }
 
 
@@ -56,23 +90,3 @@ function showSearchResults(datos) {
 
 
 
-
-
-
-//* /* ***************Consumo de la Api***************/
-/*  const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'a06e3bc826mshe9d97151d5a8e49p15c7e0jsn2dab2e85cf85',
-		'X-RapidAPI-Host': 'movie-database-alternative.p.rapidapi.com'
-	}
-};
-
-
-fetch('https://movie-database-alternative.p.rapidapi.com/?s=titanic&r=json&page=1', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err)); */
-
-
-//'https://movie-database-alternative.p.rapidapi.com/?s=Avengers%20Endgame&r=json&page=1'
