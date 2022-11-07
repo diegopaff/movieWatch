@@ -2,9 +2,14 @@
 const searchbar = document.getElementById("searchbar");
 let listaApi = [];
 searchbar.addEventListener("submit", (e)=> {
+    
     // Para que no recargue la página. 
     e.preventDefault();
 
+    // Vacío el DOM de las cards que te devuelve la api
+    searchMovies.innerHTML='';
+
+    // Capturo mediante un input text la película a buscar en la api
     const buscar = document.getElementById("buscarPelicula").value;
     const buscarEnApi = buscar.replace(/ /g, "%20"); // ELimino espacios vacio y los reemplazo por %20 para hacer el request de búsqueda a la api
     
@@ -32,6 +37,7 @@ searchbar.addEventListener("submit", (e)=> {
 const searchMovies = document.getElementById("searchMovies");
 function showSearchResults(datos) {
     let numberOfFind = 1;
+    listaApi = [];
     datos.forEach(movie => {
        
         const card = document.createElement("div");
@@ -54,6 +60,7 @@ function showSearchResults(datos) {
         const apiToDatabase = document.getElementById(`api${numberOfFind}`);
         apiToDatabase.addEventListener("click", () => {
                 addMovieFromApi(movie.Title);
+
             }
         );
         numberOfFind++;

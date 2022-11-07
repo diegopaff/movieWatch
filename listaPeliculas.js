@@ -5,7 +5,7 @@ const listaPeliculas = [
         genre: 'Drama',
         image: 'https://m.media-amazon.com/images/M/MV5BMTA1MjE0Nzk4MDleQTJeQWpwZ15BbWU4MDA0NjIxMjAx._V1_.jpg',
         release: 1994,
-        rank: 9,
+        rank: 5,
         watch: true,
         favorite: true
     },
@@ -25,7 +25,7 @@ const listaPeliculas = [
         genre: 'Action',
         image: 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_.jpg',
         release: 2008,
-        rank: 9,
+        rank: 4,
         watch: true,
         favorite: false
     },
@@ -35,7 +35,7 @@ const listaPeliculas = [
         genre: 'Drama',
         image: 'https://m.media-amazon.com/images/M/MV5BZDI1MDA5NDktNjc5Ny00MmQ4LThmODYtYTg1YmFjNThiNWVhXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg',
         release: 1993,
-        rank: 9,
+        rank: 4,
         watch: true,
         favorite: false
     },
@@ -55,7 +55,7 @@ const listaPeliculas = [
         genre: 'Aventura',
         image: 'https://m.media-amazon.com/images/M/MV5BNGJjODMxZGMtOTFlNC00MjI4LThiZWUtZTU3ZGIxYzcxMTBiXkEyXkFqcGdeQXVyODc0OTEyNDU@._V1_.jpg',
         release: 2003,
-        rank: 8,
+        rank: 3,
         watch: true,
         favorite: false
     },
@@ -65,7 +65,7 @@ const listaPeliculas = [
         genre: 'Thriller',
         image: 'https://m.media-amazon.com/images/M/MV5BYzFkMzk5YTEtNGZjMC00ZjU0LWFlZjUtZjJjOTRiZmUxODAxXkEyXkFqcGdeQXVyMTYzMDM0NTU@._V1_.jpg',
         release: 1994,
-        rank: 8,
+        rank: 4,
         watch: true,
         favorite: true
     },
@@ -75,7 +75,7 @@ const listaPeliculas = [
         genre: 'Drama',
         image: 'https://m.media-amazon.com/images/M/MV5BOWNmNzdjYjQtZjIyOS00MDhiLTg4ZWUtZGZkZDE4ZDQwZTY1XkEyXkFqcGdeQXVyODk2ODI3MTU@._V1_.jpg',
         release: 2022,
-        rank: 8,
+        rank: 5,
         watch: true,
         favorite: false
     },

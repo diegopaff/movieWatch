@@ -4,5 +4,5 @@ PENDIENTES
 
 - Cambiar imagen del señor de los anillos
 
-- bOTON AGREGAR PELICULA DESDE API
+
 

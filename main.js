@@ -11,11 +11,10 @@ if(JSON.parse(localStorage.getItem("Pelicula") != null)){
 }
 
 
-//---------------Peliculas Favoritas------------------
 
 
 
-// Agrego al DOM los elementos del array basePeliculas
+// ----------- Agrego al DOM los elementos del array basePeliculas -------------------------
 const movies = document.getElementById("movies");
 const moviesToWatch = document.getElementById("toWatch");
 
@@ -44,9 +43,7 @@ const showMovies = () => {
                 titleFavorite = 'Agregar a favoritos'
             }   
         // si la pelicula no se vio se puede agregar a vistas haciendo clic en el ojo    
-        }
-         
-        
+        }      
         card.innerHTML = `
             <div class="${isWatched}" id="watch${movie.id}" title="${titleFavorite}"> <i class="material-icons">${visibility}</i> </div>
             <div class="${isFavorite}" id="fav${movie.id}" title="${titleFavorite}"> <i class="material-icons">favorite</i> </div>
@@ -54,9 +51,15 @@ const showMovies = () => {
             <div class="movies__info">
                 <h2 class="movies__name">${movie.name}</h2>
                 <p class="movies__release">${movie.release}</p>
-                <p class="movies__genre">${movie.genre}</p>
-                    
-
+                
+                <div class="ranking" id="rank${movie.id}">
+                    <i class="material-icons ranking__star">star</i>
+                    <i class="material-icons ranking__star">star</i>
+                    <i class="material-icons ranking__star">star</i>
+                    <i class="material-icons ranking__star">star</i>
+                    <i class="material-icons ranking__star">star</i>                 
+                </div>
+                
             </div> 
         `
         //Se agrega a la seccion correspondiente segun si se vio o No
@@ -88,11 +91,24 @@ const showMovies = () => {
             
         });
 
+        const estrellas = document.querySelectorAll(`.rank${movie.id} i`);
+
+            estrellas.forEach((estrella,indexEstrella) => {
+                estrella.addEventListener('click', () => {
+                    console.log(indexEstrella);
+                })
+
+
+
+            })
+        
+
         
     }); 
 }
 showMovies();
-// funcion para agregar película a favorito
+
+// -------------- funcion para agregar película a Ya vistas -----------------------------------
 const addToWatched = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
     if(movie.watch){
@@ -127,7 +143,7 @@ const addToWatched = (id) => {
     localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));   
 }
 
-// funcion para agregar película a favorito
+// -------------- funcion para agregar y quitar película de Favoritos -----------------------------------
 const addToFavorite = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
     const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
@@ -145,7 +161,7 @@ const addToFavorite = (id) => {
             }).showToast();    
     }else{
         movie.favorite = true; // agrego pelicula a la lista
-        Toastify({
+        Toastify({ 
             text: "Se agregó a Favoritas", 
             duration: 3000,
             gravity: "bottom",
@@ -156,16 +172,16 @@ const addToFavorite = (id) => {
               },
             }).showToast();
     }
-    movies.innerHTML = '';
-    moviesToWatch.innerHTML = '';
+    movies.innerHTML = ''; //vacío el contenedor para que se vuelvan a imprimir las cards correspondientes
+    moviesToWatch.innerHTML = ''; //vacío el contenedor para que se vuelvan a imprimir las cards correspondientes
     favoriteMovies = []; // vacio el array de peliculas favoritas para que no se dupliquen
     showMovies();
     console.log(favoriteMovies);
-    //actualizo el localStorage con los nuevos valores.
-    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));   
+    
+    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));  //actualizo el localStorage con los nuevos valores.
 }
 
-// agregar al DOM la lista de favoritos 
+// -------------- Agrego al Dom la lista de Favoritos -----------------------------------
 const playlist = document.getElementById("playlist");
 const showFavorites = () => {
     favoriteMovies.forEach((movie) => {
@@ -198,7 +214,7 @@ class Pelicula {
 
 }
 
-// Agregamos nueva pelìcula con el formulario
+// -------------- Agregar Película nueva mediante un formulario -----------------------------------
 const idFormulario = document.getElementById("formulario");
 idFormulario.addEventListener("submit", (e)=> {
     // Para que no recargue la página. 
@@ -237,9 +253,18 @@ idFormulario.addEventListener("submit", (e)=> {
     idFormulario.reset();
 })
 
+// -------------- Función ranking de películas por estrellas  -----------------------------------
+
+const estrellas = document.querySelectorAll(".ranking i");
+
+estrellas.forEach((estrella,indexEstrella) => {
+    estrella.addEventListener('click', () => {
+        console.log(indexEstrella);
+    })
 
 
 
+})
 
 
 
