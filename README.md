@@ -1,4 +1,3 @@
-# movieWatch
 
 El proyecto se trata de una  watchlist de películas, dónde se puede agregar películas y  marcar si la viste o si la queres ver , también se pueden agregar a una playlist de favoritas y darles un ranking personal a cada una.
 
