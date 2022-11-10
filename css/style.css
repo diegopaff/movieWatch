@@ -147,8 +147,13 @@ a.fill-div {
     background-color: rgba(113, 113, 113, 0.29);
     justify-content: center;
     align-items: center;
+    transition: .4s ease;
 }
 
+.non__favorite:hover{
+    background-color: rgba(235, 125, 125, 0.564);
+    color: rgba(237, 2, 2, 0.425);
+}
 .favorite{
     background-color: rgba(235, 125, 125, 0.564);
     color: rgba(237, 2, 2, 0.9);
@@ -169,6 +174,14 @@ a.fill-div {
     background-color: rgba(113, 113, 113, 0.29);
     justify-content: center;
     align-items: center;
+    transition: .4s ease-in-out; 
+
+}
+
+.non__watched:hover{
+    
+    background-color: rgba(64, 165, 106, 0.416);
+    color: rgba(16, 236, 8, 0.642);
 
 }
 

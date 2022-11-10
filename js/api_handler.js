@@ -25,9 +25,7 @@ searchbar.addEventListener("submit", (e)=> {
     fetch(linkApi, options)
         .then(response => response.json())
         .then( (response) => {
-            showSearchResults(response.Search);
-            console.log(response.Search);
-            
+            showSearchResults(response.Search);   
         })
         .catch(err => console.error(err));
 
