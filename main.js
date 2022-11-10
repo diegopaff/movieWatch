@@ -91,23 +91,50 @@ const showMovies = () => {
             
         });
 
-        const estrellas = document.querySelectorAll(`.rank${movie.id} i`);
-
+        //Cuando se hace clic la estrella, devuelve el numero de index correspondiente
+        const estrellas = document.querySelectorAll(`#rank${movie.id} i`);
+        
             estrellas.forEach((estrella,indexEstrella) => {
                 estrella.addEventListener('click', () => {
-                    console.log(indexEstrella);
+                    addRanking(movie.id,indexEstrella);
                 })
-
 
 
             })
         
-
+        showRanking(movie.id, movie.rank);  
         
     }); 
 }
 showMovies();
 
+// -------------- Función ranking de películas por estrellas  -----------------------------------
+
+const addRanking = function(id, ranking){
+    const movie = basePeliculas.find((movie) => movie.id === id);
+    movie.rank = ranking + 1; 
+
+    //vuelvo a cargar todas las películas con el ranking nuevo
+    movies.innerHTML = '';
+    moviesToWatch.innerHTML = '';
+    showMovies();
+    //actualizo el localStorage con los nuevos valores.
+    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));
+}
+
+
+function showRanking(id, ranking){
+    
+    const pintarEstrella = document.querySelectorAll(`#rank${id} > i`);
+    console.log(ranking);
+    for(let i = 0; i < ranking; i++){ 
+        
+       console.log(pintarEstrella[i].classList);
+       pintarEstrella[i].classList.toggle("ranking__pintada");
+       console.log(pintarEstrella[i].classList);
+    } 
+
+}
 // -------------- funcion para agregar película a Ya vistas -----------------------------------
 const addToWatched = (id) => {
     const movie = basePeliculas.find((movie) => movie.id === id);
@@ -253,18 +280,8 @@ idFormulario.addEventListener("submit", (e)=> {
     idFormulario.reset();
 })
 
-// -------------- Función ranking de películas por estrellas  -----------------------------------
-
-const estrellas = document.querySelectorAll(".ranking i");
-
-estrellas.forEach((estrella,indexEstrella) => {
-    estrella.addEventListener('click', () => {
-        console.log(indexEstrella);
-    })
 
 
-
-})
 
 
 
