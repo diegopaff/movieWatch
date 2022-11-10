@@ -63,45 +63,15 @@ const showMovies = () => {
             </div> 
         `
         //Se agrega a la seccion correspondiente segun si se vio o No
-        if(!movie.watch){
-           
+        if(!movie.watch){ 
             moviesToWatch.appendChild(card);
-
         }else{
-
             movies.appendChild(card);
         }
 
-        //Cuando se hace clic en el corazon se agrega a la lista favoriteMovies y se cambia el estilo del boton
-        const toFavorite = document.getElementById(`fav${movie.id}`);
-        toFavorite.addEventListener("click", () => {
-            toFavorite.classList.toggle("favorite");
-            addToFavorite(movie.id);
-            playlist.innerHTML='';
-            showFavorites();
-           
-            }
-        );
-
-        //Cuando se hace clic en el ojo se agrega a la seccion ya vistas y se cambia el estilo del ojo
-        const toWatched = document.getElementById(`watch${movie.id}`);
-        toWatched.addEventListener("click", () => {
-            toWatched.classList.toggle("yes__watched");
-            addToWatched(movie.id);
-            
-        });
-
-        //Cuando se hace clic la estrella, devuelve el numero de index correspondiente
-        const estrellas = document.querySelectorAll(`#rank${movie.id} i`);
-        
-            estrellas.forEach((estrella,indexEstrella) => {
-                estrella.addEventListener('click', () => {
-                    addRanking(movie.id,indexEstrella);
-                })
-
-
-            })
-        
+        addToFavorite(movie.id);
+        addToWatched(movie.id);
+        addRanking(movie.id,movie.rank);
         showRanking(movie.id, movie.rank);  
         
     }); 
@@ -110,102 +80,93 @@ showMovies();
 
 // -------------- Función ranking de películas por estrellas  -----------------------------------
 
-const addRanking = function(id, ranking){
-    const movie = basePeliculas.find((movie) => movie.id === id);
-    movie.rank = ranking + 1; 
+function addRanking(id, ranking){
 
-    //vuelvo a cargar todas las películas con el ranking nuevo
-    movies.innerHTML = '';
-    moviesToWatch.innerHTML = '';
-    showMovies();
-    //actualizo el localStorage con los nuevos valores.
-    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));
+    //agrego un Event Listener de click para obtener la estrella que apreta
+    const estrellas = document.querySelectorAll(`#rank${id} i`);
+    estrellas.forEach((estrella,indexEstrella) => {
+        estrella.addEventListener('click', () => {
+            const movie = basePeliculas.find((movie) => movie.id === id);
+            movie.rank = indexEstrella + 1; 
+            //vuelvo a cargar todas las películas con el ranking nuevo
+            movies.innerHTML = '';
+            moviesToWatch.innerHTML = '';
+            showMovies();
+            //actualizo el localStorage con los nuevos valores.
+            localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));
+        })
+
+    })
+   
 }
 
 
 function showRanking(id, ranking){
     
     const pintarEstrella = document.querySelectorAll(`#rank${id} > i`);
-    console.log(ranking);
     for(let i = 0; i < ranking; i++){ 
-        
-       console.log(pintarEstrella[i].classList);
        pintarEstrella[i].classList.toggle("ranking__pintada");
-       console.log(pintarEstrella[i].classList);
+       
     } 
 
 }
 // -------------- funcion para agregar película a Ya vistas -----------------------------------
-const addToWatched = (id) => {
-    const movie = basePeliculas.find((movie) => movie.id === id);
-    if(movie.watch){
-        movie.watch = false; //saco pelicula de vistas
-        Toastify({
-            text: "Se agregó a Película para ver",
-            duration: 3000,
-            gravity: "bottom",
-            position: "right", 
-            stopOnFocus: true, 
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
-              },
-            }).showToast();  
-    }else{
-        movie.watch = true; // agrego pelicula a la lista
-        Toastify({
-            text: "Se agrego a Película ya vista", 
-            duration: 3000,
-            gravity: "bottom",
-            position: "right", 
-            stopOnFocus: true, 
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)",
-              },
-            }).showToast();
-    }
-    movies.innerHTML = '';
-    moviesToWatch.innerHTML = '';
-    showMovies();
-    //actualizo el localStorage con los nuevos valores.
-    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));   
+function addToWatched(id){
+
+    const toWatched = document.getElementById(`watch${id}`);
+        toWatched.addEventListener("click", () => {
+            toWatched.classList.toggle("yes__watched");
+            const movie = basePeliculas.find((movie) => movie.id === id);
+            if(movie.watch){
+                movie.watch = false; //saco pelicula de vistas
+                alertToast("Se agregó a Película para ver","watched"); 
+            }else{
+                movie.watch = true; // agrego pelicula a la lista
+                alertToast("Se agregó a Película ya vista","watched");
+            }
+            movies.innerHTML = '';
+            moviesToWatch.innerHTML = '';
+            showMovies();
+            //actualizo el localStorage con los nuevos valores.
+            localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));  
+                
+    });       
 }
 
 // -------------- funcion para agregar y quitar película de Favoritos -----------------------------------
-const addToFavorite = (id) => {
-    const movie = basePeliculas.find((movie) => movie.id === id);
-    const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
-    if(movieInFavourites){
-        movie.favorite = false; //saco pelicula de la lista
-        Toastify({
-            text: `Se eliminó de Favoritas` , 
-            duration: 3000,
-            gravity: "bottom",
-            position: "right", 
-            stopOnFocus: true, 
-            style: {
-                background: "linear-gradient(to right, #E66868, #ED21A3)",
-              },
-            }).showToast();    
-    }else{
-        movie.favorite = true; // agrego pelicula a la lista
-        Toastify({ 
-            text: "Se agregó a Favoritas", 
-            duration: 3000,
-            gravity: "bottom",
-            position: "right", 
-            stopOnFocus: true, 
-            style: {
-                background: "linear-gradient(to right, #E66868, #ED21A3)",
-              },
-            }).showToast();
-    }
-    movies.innerHTML = ''; //vacío el contenedor para que se vuelvan a imprimir las cards correspondientes
-    moviesToWatch.innerHTML = ''; //vacío el contenedor para que se vuelvan a imprimir las cards correspondientes
-    favoriteMovies = []; // vacio el array de peliculas favoritas para que no se dupliquen
-    showMovies();
-    console.log(favoriteMovies);
-    
-    localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));  //actualizo el localStorage con los nuevos valores.
+function addToFavorite(id){
+    //Cuando se hace clic en el corazon se agrega a la lista favoriteMovies y se cambia el estilo del boton
+    const toFavorite = document.getElementById(`fav${id}`);
+    toFavorite.addEventListener("click", () => {
+
+        toFavorite.classList.toggle("favorite");
+        const movie = basePeliculas.find((movie) => movie.id === id);
+        const movieInFavourites = favoriteMovies.find((movie) => movie.id ===id);
+        
+        if(movieInFavourites){
+            movie.favorite = false; //saco pelicula de la lista
+            alertToast("Se eliminó de Favoritas","favorite");
+
+        }else{
+            movie.favorite = true; // agrego pelicula a la lista
+            alertToast("Se agregó a Favoritas","favorite");
+
+        }
+        movies.innerHTML = ''; //vacío el contenedor para que se vuelvan a imprimir las cards correspondientes
+        moviesToWatch.innerHTML = ''; //vacío el contenedor para que se vuelvan a imprimir las cards correspondientes
+        favoriteMovies = []; // vacio el array de peliculas favoritas para que no se dupliquen
+        showMovies();
+        
+        localStorage.setItem("Pelicula", JSON.stringify(basePeliculas));  //actualizo el localStorage con los nuevos valores.
+              
+        playlist.innerHTML='';
+        showFavorites();
+       
+        }
+    );
+
+
+   
 }
 
 // -------------- Agrego al Dom la lista de Favoritos -----------------------------------
@@ -224,6 +185,24 @@ const showFavorites = () => {
 });
 }
 showFavorites();
+
+// ---------------- Función para agregar elementos de alert con toastify -----------
+function alertToast(message,type){
+    let color = "linear-gradient(to right, #00b09b, #96c93d)";
+    if(type === "favorite"){
+        color = "linear-gradient(to right, #E66868, #ED21A3)";
+    }
+    Toastify({ 
+        text: message, 
+        duration: 3000,
+        gravity: "bottom",
+        position: "right", 
+        stopOnFocus: true, 
+        style: {
+            background: `${color}`,
+          },
+        }).showToast();
+}
 
 // Creamos constructor de Pelicula
 class Pelicula {
@@ -261,7 +240,6 @@ idFormulario.addEventListener("submit", (e)=> {
     }
     //creamos un objeto Pelicula nuevo
     const peliculaNueva = new Pelicula(name, genre, image, release, rank, watch,favorite);
-    console.log(peliculaNueva);
 
     //agregamos el nuevo objeto Pelicula al array de películas 
     basePeliculas.push(peliculaNueva); 

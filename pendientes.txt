@@ -1,8 +1,0 @@
-PENDIENTES
-
-- Mostrar ranking con estrellitas
-
-- Cambiar imagen del señor de los anillos
-
-- Corregir funcion en rojo
-
